@@ -1,9 +1,9 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
       <ul class="nav nav-tabs custom-nav">
-        <li class="active">
+        <li class="<%= active?(root_path)%>">
           <%= link_to 'Home', root_path %>
         </li>
-        <li>
+        <li class="<%= active?(posts_path)%>">
           <%= link_to 'Posts', posts_path %>
         </li>
         <li class="dropdown pull-right">

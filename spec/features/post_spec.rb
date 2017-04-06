@@ -4,6 +4,7 @@ describe 'navigate' do
     describe 'index' do 
         before do
             user = User.create(email: "test@test.com", password: "asdasd", password_confirmation: "asdasd", first_name: "andres", last_name: "alfaro")
+            post = Post.create(date: Date.today, rationale: "P1")
             login_as(user, :scope => :user)
             visit posts_path
         end
@@ -13,6 +14,10 @@ describe 'navigate' do
         
         it "has title of Posts" do 
             expect(page).to have_content("Posts")
+        end
+
+        it "has a list of posts" do
+          expect(page).to have_content("P1")
         end
     end
     
