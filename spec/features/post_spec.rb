@@ -4,7 +4,7 @@ describe 'navigate' do
     describe 'index' do 
         before do
             user = User.create(email: "test@test.com", password: "asdasd", password_confirmation: "asdasd", first_name: "andres", last_name: "alfaro")
-            post = Post.create(date: Date.today, rationale: "P1")
+            post = Post.create(date: Date.today, rationale: "P1", user_id: user.id)
             login_as(user, :scope => :user)
             visit posts_path
         end
