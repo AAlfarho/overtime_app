@@ -1,6 +1,27 @@
-<%= form_for @post do |post|%>
-    <%= post.date_field :date %>
-    <%= post.text_area :rationale %>
+<%= form_for @post, class: 'form-horizontal', html: {multipart: true} do |post| %>
+    <% if @post.errors.any? %>
+        <div id="error_explanation" class="panel panel-danger">
+          <div class="panel-heading"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being processed</div>
+          <div class="panel-body">
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+          </div>
+        </div>
+    <% end %>
 
-    <%= post.submit :"Save"%>
+    <div class="form-group">
+      <%= post.label :date, class: 'control-label' %>
+      <%= post.date_field :date, class: 'form-control ' %>
+    </div>
+
+    <div class="form-group">
+      <%= post.label :rationale, class: 'control-label' %>
+      <%= post.text_area :rationale, class: 'form-control ' %>
+    </div>
+    <div class="actions">
+      <%= post.submit 'Save', class: 'btn btn-primary' %>
+    </div>
 <% end %>
