@@ -5,11 +5,11 @@ describe 'navigate' do
     ##the create inside factory girl actually goes and creates a registry in the database
     ##and that takes time and slows the app, however because we have a db query User.last.posts.last.rationale
     ##it is required, when we dont do that we can use build_stubbed
-    user = FactoryGirl.create(:user)
-    post = FactoryGirl.build_stubbed(:post)
+    @user = FactoryGirl.create(:user)
+    @post = FactoryGirl.create(:post_with_user, user_id: @user.id)
     #post = FactoryGirl.create(:post_with_user, user_id: user.id)
     # #Post.create(date: Date.today, rationale: "P1", user_id: user.id)
-    login_as(user, :scope => :user)
+    login_as(@user, :scope => :user)
   end
     describe 'index' do
       before do
@@ -50,7 +50,25 @@ describe 'navigate' do
             fill_in 'post[rationale]', with: 'user_association'
             
             click_on 'Save'
-            expect(User.last.posts.last.rationale).to eq('user_association')
+            expect(@user.posts.last.rationale).to eq('user_association')
         end
     end
+
+  describe 'edit ' do
+    it 'can be reached by clickin edit ont he index page' do
+      visit posts_path
+      click_link("edit_post_#{@post.id}")
+      expect(page.status_code).to eq(200)
+    end
+
+    it 'can be succesfully edited' do
+      visit edit_post_path(@post)
+
+      fill_in 'post[date]', with: @post.date
+      fill_in 'post[rationale]', with: 'new rationale'
+
+      click_on 'Save'
+      expect(page).to have_content('new rationale')
+    end
+  end
 end
