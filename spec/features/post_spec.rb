@@ -1,13 +1,20 @@
 require 'rails_helper'
 
 describe 'navigate' do
-    describe 'index' do 
-        before do
-            user = User.create(email: "test@test.com", password: "asdasd", password_confirmation: "asdasd", first_name: "andres", last_name: "alfaro")
-            post = Post.create(date: Date.today, rationale: "P1", user_id: user.id)
-            login_as(user, :scope => :user)
-            visit posts_path
-        end
+  before do
+    ##the create inside factory girl actually goes and creates a registry in the database
+    ##and that takes time and slows the app, however because we have a db query User.last.posts.last.rationale
+    ##it is required, when we dont do that we can use build_stubbed
+    user = FactoryGirl.create(:user)
+    post = FactoryGirl.build_stubbed(:post)
+    #post = FactoryGirl.create(:post_with_user, user_id: user.id)
+    # #Post.create(date: Date.today, rationale: "P1", user_id: user.id)
+    login_as(user, :scope => :user)
+  end
+    describe 'index' do
+      before do
+        visit posts_path
+      end
         it "can be reached" do 
             expect(page.status_code).to eq(200)
         end
@@ -17,14 +24,12 @@ describe 'navigate' do
         end
 
         it "has a list of posts" do
-          expect(page).to have_content("P1")
+          expect(page).to have_content("Rationale")
         end
     end
     
     describe "creation" do 
         before do
-            user = User.create(email: "test@test.com", password: "asdasd", password_confirmation: "asdasd", first_name: "andres", last_name: "alfaro")
-            login_as(user, :scope => :user)
             visit new_post_path
         end
         

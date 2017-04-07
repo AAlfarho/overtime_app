@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -19,10 +20,12 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'capybara', '~> 2.13'
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
 end
 
 group :test do
-    gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+
 end
 
 group :development do
