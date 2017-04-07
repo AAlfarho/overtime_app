@@ -71,4 +71,13 @@ describe 'navigate' do
       expect(page).to have_content('new rationale')
     end
   end
+
+  describe 'delete' do
+     it 'can be deleted' do
+       postToDelete = FactoryGirl.create(:post_with_rationale_n_user, user_id: @user.id, rationale: "tobedeleted")
+       visit posts_path
+       click_link("delete_post_#{postToDelete.id}")
+       expect(page.status_code).to eq(200)
+     end
+  end
 end

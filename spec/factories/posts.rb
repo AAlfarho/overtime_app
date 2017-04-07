@@ -13,10 +13,10 @@ FactoryGirl.define do
     user_id -1
   end
 
-  factory :post_with_rationale, class: 'Post' do
+  factory :post_with_rationale_n_user, class: 'Post' do
     date Date.today
     rationale ""
-    user
+    user_id  -1
   end
 
   factory :second_post, class: 'Post' do
