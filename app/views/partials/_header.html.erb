@@ -1,4 +1,9 @@
-<div class="logo">
-  <h1>Time Tracker</h1>
+<div class='custom-header'>
+  <div class="logo">
+    <h1>Time Tracker</h1>
+  </div>
+  <% if user_signed_in? %>
+      <%= render 'partials/nav' %>
+  <% end %>
 </div>
-<%= render 'partials/nav' %>
+<br>
