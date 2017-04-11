@@ -10,8 +10,8 @@ class AdminUserDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     posts: Field::HasMany,
     id: Field::Number,
-    email: Field::String,
-    password: Field::String,
+    email: Field::String.with_options(searchable: true),
+    password: Field::String.with_options(searchable: false),
     sign_in_count: Field::Number,
     current_sign_in_at: Field::DateTime,
     last_sign_in_at: Field::DateTime,
@@ -31,7 +31,6 @@ class AdminUserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :posts,
-    :id,
     :email,
   ].freeze
 
