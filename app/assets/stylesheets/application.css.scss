@@ -10,7 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require gritter
- *= require_tree .
- *= require_self
+ * require gritter
+ * require bourbon
+ * require_tree .
+ * require_self
  */
+
+@import "bourbon";
+@import "gritter";
+@import "boostraply";
+@import "posts";
