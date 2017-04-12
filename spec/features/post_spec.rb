@@ -6,7 +6,7 @@ describe 'navigate' do
     ##and that takes time and slows the app, however because we have a db query User.last.posts.last.rationale
     ##it is required, when we dont do that we can use build_stubbed
     @user = FactoryGirl.create(:user)
-    @post = FactoryGirl.create(:post_with_user, user_id: @user.id)
+    @post = FactoryGirl.create(:post_with_rationale_n_user, user_id: @user.id, rationale: "User #{@user.id} Rationale")
     #post = FactoryGirl.create(:post_with_user, user_id: user.id)
     # #Post.create(date: Date.today, rationale: "P1", user_id: user.id)
     login_as(@user, :scope => :user)
@@ -24,13 +24,22 @@ describe 'navigate' do
         end
 
         it "has a list of posts" do
-          expect(page).to have_content("Rationale")
+          expect(page).to have_content("User #{@user.id} Rationale")
+        end
+
+        it "unauthorized user cant see other user post" do
+          logout(:user)
+          unauthorized_user = FactoryGirl.create(:custom_user, first_name: "another", last_name: "user")
+          login_as(unauthorized_user, :scope => :user)
+          visit posts_path
+          expect(page).to_not have_content("User #{@user.id} Rationale")
         end
     end
     
     describe "creation" do 
         before do
-            visit new_post_path
+          login_as(@user, :scope => :user)
+          visit new_post_path
         end
         
         it 'can reach form' do 
