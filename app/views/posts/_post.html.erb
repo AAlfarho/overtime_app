@@ -12,6 +12,9 @@
     <%= post.user.full_name %>
   </td>
   <td>
+    <%= post.status.upcase %>
+  </td>
+  <td>
     <%= link_to 'Edit', edit_post_path(post), id: "edit_post_#{post.id}" %> |
     <%= link_to 'Delete', post_path(post), id: "delete_post_#{post.id}", method: :delete, data: {confirm: 'Are you sure?', class: 'btn btn-mini btn-danger'}%>
   </td>
