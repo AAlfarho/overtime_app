@@ -46,6 +46,7 @@ class PostsController < ApplicationController
     end
 
     def destroy
+      authorize @post
       @post.delete
 
       respond_to do |format|

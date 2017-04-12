@@ -2,12 +2,15 @@ class PostPolicy < ApplicationPolicy
   def update?
     if admin?
       return true
-    elsif samePostUser? && postApproved?
+    elsif samePostUser? && !postApproved?
       return true
     end
     return false
   end
 
+  def destroy?
+    update?
+  end
 
   def admin?
     admin_types.include?(user.type)
@@ -18,6 +21,6 @@ class PostPolicy < ApplicationPolicy
   end
 
   def postApproved?
-    !record.approved?
+    record.approved?
   end
 end
