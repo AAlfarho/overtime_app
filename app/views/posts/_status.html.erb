@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= post.radio_button :status, 'submitted' %>
+  <%= post.label :status, 'Submitted', class: 'control-label' %>
+
+  <%= post.radio_button :status, 'approved'%>
+  <%= post.label :status, 'Approved', class: 'control-label' %>
+
+  <%= post.radio_button :status, 'rejected'%>
+  <%= post.label :status, 'Rejected', class: 'control-label' %>
+</div>
