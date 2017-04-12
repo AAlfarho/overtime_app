@@ -13,7 +13,6 @@
   <%= render 'partials/header' %>
       <%= yield %>
 </div>
-
-<%= js add_gritter(flash[:notice], title: 'Overtime Notification', sticky: false, time: 3000)%>
+<%= render 'partials/alerts' %>
 </body>
 </html>

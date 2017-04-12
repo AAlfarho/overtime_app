@@ -70,10 +70,20 @@ describe 'navigate' do
       click_on 'Save'
       expect(page).to have_content('new rationale')
     end
+
+    it 'cannot be edited by unauthorized user' do
+      another_user = FactoryGirl.create(:custom_user, first_name: "another first", last_name: "another last")
+      logout(:user)
+      login_as(another_user, :scope => :user)
+
+      visit edit_post_path(@post)
+      expect(current_path).to eq(root_path)
+    end
   end
 
   describe 'delete' do
      it 'can be deleted' do
+       login_as(@user, :scope => :user)
        postToDelete = FactoryGirl.create(:post_with_rationale_n_user, user_id: @user.id, rationale: "tobedeleted")
        visit posts_path
        click_link("delete_post_#{postToDelete.id}")
