@@ -15,6 +15,7 @@ gem 'gritter', '~> 1.2'
 gem 'administrate', '~> 0.5.0'
 gem 'bourbon'
 gem 'pundit', '~> 1.1'
+gem 'puma', '~> 3.8', '>= 3.8.2'
 
 
 group :development, :test do
