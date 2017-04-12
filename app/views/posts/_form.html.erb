@@ -25,6 +25,14 @@
       <%= post.label :rationale, class: 'control-label' %>
       <%= post.text_area :rationale, class: 'form-control' %>
     </div>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= post.label :overtime_hours, class: 'control-label' %>
+          <%= post.number_field :overtime_hours, class: 'form-control', step: 0.01, min: 0.01 %>
+        </div>
+      </div>
+    </div>
 
     <%= render partial: 'status', locals: {post: post} if current_user.type == 'AdminUser' %>
     <div class="actions">

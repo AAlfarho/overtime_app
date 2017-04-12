@@ -49,14 +49,16 @@ describe 'navigate' do
         it "can be created from new page" do 
             fill_in 'post[date]', with: Date.today
             fill_in 'post[rationale]', with: 'Rationale set'
-            
+            fill_in 'post[overtime_hours]', with: '0.5'
             click_on 'Save'
-            expect(page).to have_content("Rationale set")
+
+            expect(@user.posts.last.rationale).to eq('Rationale set')
         end
         
         it 'post associated with user' do
             fill_in 'post[date]', with: Date.today
             fill_in 'post[rationale]', with: 'user_association'
+            fill_in 'post[overtime_hours]', with: '0.5'
             
             click_on 'Save'
             expect(@user.posts.last.rationale).to eq('user_association')
@@ -77,7 +79,8 @@ describe 'navigate' do
       fill_in 'post[rationale]', with: 'new rationale'
 
       click_on 'Save'
-      expect(page).to have_content('new rationale')
+      expect(@post.reload.rationale).to eq('new rationale')
+
     end
 
     it 'cannot be edited by unauthorized user' do

@@ -39,7 +39,7 @@ class PostsController < ApplicationController
           format.html { redirect_to @post, notice: 'Post was successfully updated.' }
           format.json { render :show, status: :created, location: @post }
         else
-          format.html { render :show }
+          format.html { render :edit }
           format.json { render json: @post.errors, status: :unprocessable_entity }
         end
       end
@@ -57,7 +57,7 @@ class PostsController < ApplicationController
     
     private
         def post_params
-            params.require(:post).permit(:date, :rationale, :status)
+            params.require(:post).permit(:date, :rationale, :status, :overtime_hours)
         end
         
         def set_post
