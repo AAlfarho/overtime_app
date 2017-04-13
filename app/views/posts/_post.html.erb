@@ -1,15 +1,15 @@
 <tr>
   <td>
-    <%= post.id %>
-  </td>
-  <td>
     <%= post.date %>
   </td>
   <td>
-    <%= truncate(post.rationale) %>
+    <%= post.overtime_hours %>
   </td>
   <td>
     <%= post.user.full_name %>
+  </td>
+  <td>
+    <%= link_to truncate(post.rationale), post %>
   </td>
   <td>
     <%= status_label(post.status)%>
