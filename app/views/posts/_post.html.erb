@@ -16,8 +16,12 @@
   </td>
   <td>
     <%if policy(post).update?%>
-        <%= link_to 'Edit', edit_post_path(post), id: "edit_post_#{post.id}" %> |
-        <%= link_to 'Delete', post_path(post), id: "delete_post_#{post.id}", method: :delete, data: {confirm: 'Are you sure?', class: 'btn btn-mini btn-danger'}%>
+        <%= link_to '', edit_post_path(post), id: "edit_post_#{post.id}", class: 'glyphicon glyphicon-pencil index-icons' %>
+    <% end %>
+  </td>
+  <td>
+    <%if policy(post).destroy?%>
+        <%= link_to '', post_path(post), id: "delete_post_#{post.id}", class: 'glyphicon glyphicon-trash index-icons', method: :delete, data: {confirm: 'Are you sure?', class: 'btn btn-mini btn-danger'}%>
     <% end %>
   </td>
 </tr>
